@@ -3,7 +3,7 @@ require 'rails_helper'
 feature 'reviewing' do
   before {Restaurant.create name: 'KFC'}
 
-  scenario 'allows user to elave a reviw using a form' do
+  scenario 'allows user to elave a review using a form' do
     visit '/restaurants'
     click_link 'Review KFC'
     fill_in "Thoughts", with: "so so"
