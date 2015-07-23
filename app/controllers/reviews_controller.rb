@@ -17,4 +17,5 @@ class ReviewsController < ApplicationController
     params[:review][:user_id] = current_user.id
     params.require(:review).permit(:thoughts, :rating, :user_id)
   end
+
 end
