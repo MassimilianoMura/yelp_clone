@@ -14,6 +14,7 @@ class ReviewsController < ApplicationController
   end
 
   def review_params
-    params.require(:review).permit(:thoughts, :rating)
+    params[:review][:user_id] = current_user.id
+    params.require(:review).permit(:thoughts, :rating, :user_id)
   end
 end
