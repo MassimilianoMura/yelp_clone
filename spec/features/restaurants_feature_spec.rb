@@ -3,23 +3,16 @@ require 'rails_helper'
 feature 'restaurants' do
 
   before do
-    visit('/')
-    click_link('Sign up')
-    fill_in('Email', with: 'test@example.com')
-    fill_in('Password', with: 'testtest')
-    fill_in('Password confirmation', with: 'testtest')
-    click_button('Sign up')
+    sign_up
   end
 
 
   context 'no restaurants have been added' do
-
     scenario 'should display a prompt to add a restaurant' do
       visit '/restaurants'
       expect(page).to have_content 'No restaurants yet'
       expect(page).to have_link 'Add a restaurant'
     end
-
   end
 
 
@@ -35,12 +28,10 @@ feature 'restaurants' do
       expect(page).to have_content('KFC')
       expect(page).not_to have_content('No restaurants yet')
     end
-
   end
 
 
   context 'creating restaurants' do
-
     scenario 'prompts user to fill out a form, then displays the new restaurant' do
       visit '/restaurants'
       click_link 'Add a restaurant'
@@ -60,7 +51,6 @@ feature 'restaurants' do
         expect(page).to have_content 'error'
       end
     end
-
   end
 
 
@@ -74,7 +64,6 @@ feature 'restaurants' do
       expect(page).to have_content 'KFC'
       expect(current_path).to eq "/restaurants/#{kfc.id}"
     end
-
   end
 
 
@@ -90,7 +79,6 @@ feature 'restaurants' do
       expect(page).to have_content 'Kentucky Fried Chicken'
       expect(current_path).to eq '/restaurants'
     end
-
   end
 
 
@@ -104,7 +92,15 @@ feature 'restaurants' do
       expect(page).not_to have_content 'KFC'
       expect(page).to have_content 'Restaurant deleted successfully'
     end
+  end
 
+  def sign_up
+    visit('/')
+    click_link('Sign up')
+    fill_in('Email', with: 'test@example.com')
+    fill_in('Password', with: 'testtest')
+    fill_in('Password confirmation', with: 'testtest')
+    click_button('Sign up')
   end
 
 end

@@ -45,7 +45,6 @@ class RestaurantsController < ApplicationController
   def restaurant_params
     params[:restaurant][:user_id] = current_user.id
     params.require(:restaurant).permit(:name, :user_id)
-
   end
 
 end
